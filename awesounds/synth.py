@@ -85,26 +85,26 @@ def tick():
 def toggle():
     """Two-tone toggle — on/off."""
     def gen(t):
-        if t < 0.04:
-            e = _envelope(t, 0.002, 0.01, 0.02)
-            return e * _sine(800, t) * 0.4
+        if t < 0.05:
+            e = _envelope(t, 0.002, 0.015, 0.025)
+            return e * (_sine(880, t) * 0.5 + _sine(1760, t) * 0.2)
         else:
-            t2 = t - 0.04
-            e = _envelope(t2, 0.002, 0.01, 0.02)
-            return e * _sine(1200, t) * 0.35
-    return _generate(0.08, gen)
+            t2 = t - 0.05
+            e = _envelope(t2, 0.002, 0.015, 0.025)
+            return e * (_sine(1320, t) * 0.5 + _sine(2640, t) * 0.2)
+    return _generate(0.1, gen)
 
 def success():
     """Ascending chime — two notes up."""
     def gen(t):
-        if t < 0.08:
-            e = _envelope(t, 0.005, 0.02, 0.04)
-            return e * _sine(523, t) * 0.4
+        if t < 0.09:
+            e = _envelope(t, 0.005, 0.025, 0.05)
+            return e * (_sine(523, t) * 0.5 + _sine(1046, t) * 0.2)
         else:
-            t2 = t - 0.08
-            e = _envelope(t2, 0.005, 0.03, 0.06)
-            return e * _sine(784, t) * 0.45
-    return _generate(0.18, gen)
+            t2 = t - 0.09
+            e = _envelope(t2, 0.005, 0.035, 0.07)
+            return e * (_sine(784, t) * 0.55 + _sine(1568, t) * 0.25)
+    return _generate(0.22, gen)
 
 def error():
     """Descending buzz — two notes down."""
