@@ -1,0 +1,9 @@
+[project]
+name = "awesounds"
+version = "0.1.0"
+description = "Synthesized interaction sounds for AwesomeWM"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+awesound = "awesounds.synth:main"
