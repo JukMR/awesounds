@@ -200,23 +200,37 @@ def page():
     return _generate(0.1, gen)
 
 
+def toggle_off():
+    """Two-tone toggle off — high to low (inverse of toggle)."""
+    def gen(t):
+        if t < 0.05:
+            e = _envelope(t, 0.002, 0.015, 0.025)
+            return e * (_sine(1320, t) * 0.5 + _sine(2640, t) * 0.2)
+        else:
+            t2 = t - 0.05
+            e = _envelope(t2, 0.002, 0.015, 0.025)
+            return e * (_sine(880, t) * 0.5 + _sine(1760, t) * 0.2)
+    return _generate(0.1, gen)
+
+
 # -- Registry -----------------------------------------------------------------
 
 CUES = {
-    "press":    press,
-    "release":  release,
-    "tick":     tick,
-    "toggle":   toggle,
-    "success":  success,
-    "error":    error,
-    "chime":    chime,
-    "sparkle":  sparkle,
-    "droplet":  droplet,
-    "bloom":    bloom,
-    "whisper":  whisper,
-    "loading":  loading,
-    "ready":    ready,
-    "page":     page,
+    "press":      press,
+    "release":    release,
+    "tick":       tick,
+    "toggle":     toggle,
+    "toggle_off": toggle_off,
+    "success":    success,
+    "error":      error,
+    "chime":      chime,
+    "sparkle":    sparkle,
+    "droplet":    droplet,
+    "bloom":      bloom,
+    "whisper":    whisper,
+    "loading":    loading,
+    "ready":      ready,
+    "page":       page,
 }
 
 def play(cue_name):
