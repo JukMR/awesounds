@@ -213,6 +213,32 @@ def toggle_off():
     return _generate(0.1, gen)
 
 
+def mic_on():
+    """Mic unmute — chime-like ascending (low to high)."""
+    def gen(t):
+        if t < 0.05:
+            e = _envelope(t, 0.003, 0.012, 0.025)
+            return e * (_sine(660, t) * 0.4 + _saw(660, t) * 0.15 + _sine(1320, t) * 0.1)
+        else:
+            t2 = t - 0.05
+            e = _envelope(t2, 0.003, 0.012, 0.025)
+            return e * (_sine(990, t) * 0.4 + _saw(990, t) * 0.15 + _sine(1980, t) * 0.1)
+    return _generate(0.1, gen)
+
+
+def mic_off():
+    """Mic mute — chime-like descending (high to low)."""
+    def gen(t):
+        if t < 0.05:
+            e = _envelope(t, 0.003, 0.012, 0.025)
+            return e * (_sine(990, t) * 0.4 + _saw(990, t) * 0.15 + _sine(1980, t) * 0.1)
+        else:
+            t2 = t - 0.05
+            e = _envelope(t2, 0.003, 0.012, 0.025)
+            return e * (_sine(660, t) * 0.4 + _saw(660, t) * 0.15 + _sine(1320, t) * 0.1)
+    return _generate(0.1, gen)
+
+
 # -- Registry -----------------------------------------------------------------
 
 CUES = {
@@ -221,6 +247,8 @@ CUES = {
     "tick":       tick,
     "toggle":     toggle,
     "toggle_off": toggle_off,
+    "mic_on":     mic_on,
+    "mic_off":    mic_off,
     "success":    success,
     "error":      error,
     "chime":      chime,
